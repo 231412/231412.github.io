@@ -1,0 +1,486 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.os-desktop {
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.desktop-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.desktop-icons {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.desktop-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+    color: white;
+    text-align: center;
+    user-select: none;
+}
+
+.desktop-icon:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+.icon-emoji {
+    font-size: 32px;
+    margin-bottom: 5px;
+}
+
+.desktop-icon span {
+    font-size: 12px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+#windows-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.window {
+    position: absolute !important;
+    background: #ffffff !important;
+    border-radius: 10px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+    border: 1px solid #cccccc !important;
+    display: flex !important;
+    flex-direction: column !important;
+    min-width: 400px !important;
+    min-height: 300px !important;
+    pointer-events: auto !important;
+    overflow: hidden !important;
+    z-index: 101 !important;
+    resize: both !important;
+}
+
+.window-header {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 12px 16px !important;
+    background: #f5f5f5 !important;
+    border-bottom: 1px solid #e0e0e0 !important;
+    border-radius: 10px 10px 0 0 !important;
+    cursor: move !important;
+    user-select: none !important;
+    flex-shrink: 0 !important;
+}
+
+.window-title {
+    font-weight: 600 !important;
+    color: #333333 !important;
+    font-size: 14px !important;
+    margin: 0 !important;
+}
+
+.window-controls {
+    display: flex !important;
+    gap: 8px !important;
+    align-items: center !important;
+}
+
+.window-control {
+    width: 20px !important;
+    height: 20px !important;
+    border-radius: 3px !important;
+    cursor: pointer !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 12px !important;
+    font-weight: bold !important;
+    color: #000000 !important;
+    transition: all 0.2s ease !important;
+    border: none !important;
+    user-select: none !important;
+}
+
+.window-control.close {
+    background: #ff5f57 !important;
+}
+
+.window-control.close:hover {
+    background: #e0443e !important;
+}
+
+.window-control.minimize {
+    background: #ffbd2e !important;
+}
+
+.window-control.minimize:hover {
+    background: #e6a90a !important;
+}
+
+.window-control.maximize {
+    background: #28ca42 !important;
+}
+
+.window-control.maximize:hover {
+    background: #1fa832 !important;
+}
+
+.window-content {
+    flex: 1 !important;
+    background: #ffffff !important;
+    overflow: auto !important;
+    border-radius: 0 0 10px 10px !important;
+}
+
+.taskbar {
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 48px !important;
+    background: rgba(0, 0, 0, 0.85) !important;
+    backdrop-filter: blur(10px) !important;
+    display: flex !important;
+    align-items: center !important;
+    padding: 0 12px !important;
+    z-index: 1000 !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.start-menu-btn {
+    width: 40px !important;
+    height: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background: #0078d7 !important;
+    border-radius: 5px !important;
+    color: white !important;
+    cursor: pointer !important;
+    margin-right: 10px !important;
+    transition: background-color 0.2s ease !important;
+    border: none !important;
+}
+
+.start-menu-btn:hover {
+    background: #106ebe !important;
+    transform: scale(1.05);
+}
+
+.taskbar-apps {
+    flex: 1 !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    margin: 0 12px !important;
+}
+
+.taskbar-app {
+    padding: 8px 12px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 5px !important;
+    color: white !important;
+    font-size: 12px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    border: none !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 120px !important;
+}
+
+.taskbar-app:hover {
+    background: rgba(255, 255, 255, 0.15) !important;
+}
+
+.taskbar-app.active {
+    background: rgba(255, 255, 255, 0.2) !important;
+}
+
+.system-tray {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    color: white !important;
+    font-size: 12px !important;
+}
+
+.time-display {
+    padding: 4px 8px !important;
+    border-radius: 3px !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.theme-toggle {
+    cursor: pointer !important;
+    padding: 6px !important;
+    border-radius: 3px !important;
+    transition: background-color 0.2s ease !important;
+    border: none !important;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.start-menu {
+    position: fixed !important;
+    bottom: 48px !important;
+    left: 12px !important;
+    width: 400px !important;
+    height: 500px !important;
+    background: #ffffff !important;
+    border-radius: 10px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+    display: none !important;
+    flex-direction: column !important;
+    z-index: 999 !important;
+    overflow: hidden !important;
+    border: 1px solid #e0e0e0 !important;
+}
+
+.start-menu.active {
+    display: flex !important;
+    animation: menuSlideUp 0.2s ease-out;
+}
+
+@keyframes menuSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.start-menu-header {
+    padding: 20px !important;
+    background: linear-gradient(135deg, #0078d7, #5a9bd4) !important;
+    color: white !important;
+    flex-shrink: 0 !important;
+}
+
+.user-profile {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+}
+
+.avatar-placeholder {
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.2) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 20px !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+.user-profile span {
+    font-weight: 600 !important;
+    font-size: 16px !important;
+}
+
+.start-menu-apps {
+    flex: 1 !important;
+    padding: 20px !important;
+    overflow: auto !important;
+}
+
+.app-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 12px !important;
+}
+
+.app-item {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 12px 8px !important;
+    border-radius: 6px !important;
+    cursor: pointer !important;
+    transition: all 0.2s ease !important;
+    text-align: center !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+.app-item:hover {
+    background: rgba(0, 120, 215, 0.1) !important;
+    transform: scale(1.05);
+}
+
+.app-item .icon-emoji {
+    font-size: 24px !important;
+    margin-bottom: 8px !important;
+}
+
+.app-item span {
+    font-size: 12px !important;
+    color: #333333 !important;
+    font-weight: 500 !important;
+}
+
+.start-menu-footer {
+    padding: 12px 20px !important;
+    border-top: 1px solid #e0e0e0 !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    flex-shrink: 0 !important;
+    background: #f8f8f8 !important;
+}
+
+.power-options {
+    cursor: pointer !important;
+    padding: 8px !important;
+    border-radius: 5px !important;
+    transition: background-color 0.2s ease !important;
+    border: none !important;
+    background: transparent !important;
+}
+
+.power-options:hover {
+    background: rgba(0, 0, 0, 0.1) !important;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+@media (max-width: 768px) {
+    .start-menu {
+        width: 100vw !important;
+        height: 70vh !important;
+        left: 0 !important;
+        bottom: 48px !important;
+        border-radius: 10px 10px 0 0 !important;
+    }
+    
+    .app-grid {
+        grid-template-columns: repeat(2, 1fr) !important;
+    }
+    
+    .desktop-icons {
+        display: none !important;
+    }
+    
+    .window {
+        width: 95vw !important;
+        height: 80vh !important;
+        left: 2.5vw !important;
+        top: 5vh !important;
+        min-width: unset !important;
+        min-height: unset !important;
+    }
+}
+
+.os-desktop.dark-theme {
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%) !important;
+}
+
+.os-desktop.dark-theme .taskbar {
+    background: rgba(0, 0, 0, 0.9) !important;
+}
+
+.os-desktop.dark-theme .start-menu {
+    background: #2d2d2d !important;
+    color: #ffffff !important;
+}
+
+.os-desktop.dark-theme .window {
+    background: #2d2d2d !important;
+    color: #ffffff !important;
+    border-color: #444444 !important;
+}
+
+.os-desktop.dark-theme .window-header {
+    background: #3d3d3d !important;
+    border-color: #444444 !important;
+}
+
+.os-desktop.dark-theme .window-content {
+    background: #2d2d2d !important;
+    color: #ffffff !important;
+}
+
+.os-desktop.dark-theme .app-item span {
+    color: #ffffff !important;
+}
+
+.os-desktop.dark-theme .desktop-icon {
+    color: #ffffff !important;
+}
+
+
+.window {
+    animation: windowOpen 0.3s ease-out;
+}
+
+@keyframes windowOpen {
+    from {
+        opacity: 0;
+        transform: scale(0.9) translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+
+.window:focus-within {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4) !important;
+}
